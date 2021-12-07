@@ -1,4 +1,9 @@
 #!/bin/bash
+
+aws configure set aws_access_key_id "${AWS_ACCESS_KEY_ID}"
+aws configure set aws_secret_access_key "${AWS_SECRET_ACCESS_KEY}"
+aws configure set region "${AWS_DEFAULT_REGION}"
+
 SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 cd $SCRIPTPATH/..
@@ -15,8 +20,8 @@ docker build -f ./src/Shared/Dockerfile \
     -t pope-shared-container .
 
 docker run --rm \
-    -e AWS_ACCESS_KEY_ID="AKIA5TUAS74CSABDSRNU" \
-    -e AWS_SECRET_ACCESS_KEY="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" \
-    -e AWS_DEFAULT_REGION="us-east-1" \
+    -e AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}" \
+    -e AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}" \
+    -e AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION}" \
     --name release-pope-shared pope-shared-container \
-    --source "https://codeartifact.us-east-1.amazonaws.com/nuget/codeartifact-repository/v3/index.json"
+    --source "https://c2software-935498809093.d.codeartifact.us-east-1.amazonaws.com/nuget/pope-shared-repo/v3/index.json"

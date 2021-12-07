@@ -33,6 +33,6 @@ docker run --rm \
     -e AWS_SECRET_ACCESS_KEY="" \
     -e AWS_DEFAULT_REGION="us-east-1" \
     --name release-pope-shared pope-shared-container \
-    --source "https://codeartifact.us-east-1.amazonaws.com/nuget/codeartifact-repository/v3/index.json"
+    --source "https://c2software-935498809093.d.codeartifact.us-east-1.amazonaws.com/nuget/pope-shared-repo/v3/index.json"
 ```
 # pope-shared

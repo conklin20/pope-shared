@@ -1,3 +1,4 @@
+# FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS base
 RUN apt-get update && apt install unzip && apt-get install -y curl
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -8,7 +9,8 @@ RUN dotnet new tool-manifest --name manifest
 RUN dotnet tool install --ignore-failed-sources AWS.CodeArtifact.NuGet.CredentialProvider
 RUN dotnet codeartifact-creds install
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+# FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
 # To use the debug build configuration pass --build-arg Configuration=Debug
 ARG Configuration="Release"
@@ -36,10 +38,13 @@ RUN dotnet test "tests/Shared.Tests" \
 FROM build AS publish
 
 ARG Configuration="Release"
-ARG Version=1.0.0
+ARG Version=1.0.2
+
+# RUN echo ${Version}
 
 RUN dotnet pack "src/Shared"\
-    -p:Version=$Version \
+    -p:Version=1.0.2 \
+    -p:TargetFrameworks=net5.0 \
     --configuration $Configuration \
     --output /artifacts \
     --include-symbols
