@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "841f2ef9-5027-4fb5-9b0e-a7e36cd40ca7": {
+      "ProjectGuid": "841f2ef9-5027-4fb5-9b0e-a7e36cd40ca7",
+      "DisplayName": "Shared.Tests",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
