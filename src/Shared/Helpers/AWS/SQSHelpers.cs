@@ -8,14 +8,11 @@ namespace Shared.Helpers.AWS
 {
     public class SQSHelpers : ISQSHelpers
     {
-
         // Method to put a message on a queue
-        public async Task<SendMessageResponse> SendMessageAsync(string qUrl, string messageBody)
-        {
-            var sqsClient = new AmazonSQSClient();
-            SendMessageResponse responseSendMsg = await sqsClient.SendMessageAsync(qUrl, messageBody);
-            Console.WriteLine($"Message {responseSendMsg.MessageId} added to queue\n  {qUrl}");
-            Console.WriteLine($"HttpStatusCode: {responseSendMsg.HttpStatusCode}");
+        public async Task<SendMessageResponse> SendMessageAsync(AmazonSQSConfig sqsConfig, string qUrl, string message)
+        {        
+            var sqsClient = new AmazonSQSClient(sqsConfig);
+            SendMessageResponse responseSendMsg = await sqsClient.SendMessageAsync(qUrl, message);
             return responseSendMsg;
         }
     }

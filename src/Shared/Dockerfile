@@ -38,12 +38,12 @@ RUN dotnet test "tests/Shared.Tests" \
 FROM build AS publish
 
 ARG Configuration="Release"
-ARG Version=1.0.2
+ARG Version=1.0.4
 
 # RUN echo ${Version}
 
 RUN dotnet pack "src/Shared"\
-    -p:Version=1.0.2 \
+    -p:Version=1.0.4 \
     -p:TargetFrameworks=net5.0 \
     --configuration $Configuration \
     --output /artifacts \

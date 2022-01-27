@@ -1,10 +1,11 @@
-﻿using Amazon.SQS.Model;
+﻿using Amazon.SQS;
+using Amazon.SQS.Model;
 using System.Threading.Tasks;
 
 namespace Shared.Interfaces.AWS
 {
     public interface ISQSHelpers
     {
-        Task<SendMessageResponse> SendMessageAsync(string qUrl, string messageBody);
+        Task<SendMessageResponse> SendMessageAsync(AmazonSQSConfig sqsConfig, string qUrl, string message);
     }
 }
